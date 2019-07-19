@@ -4,8 +4,8 @@
   "description": "JavaScript (and TypeScript) library for HTML annotation",
   "author": "Pedro Sousa Lacerda <pslacerda@gmail.com>",
   "license": "ISC",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/anote.js",
+  "types": "dist/anote.d.ts",
   "scripts": {
     "build": "tsc"
   },
