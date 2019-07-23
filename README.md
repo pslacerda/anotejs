@@ -4,10 +4,10 @@ This library aim to aid people to annotate plain text sentences.
 
 I found it useful to some compnanies and projects. So talking with my colleague we decided to implement it.
 
-It is a short term side project.
+It is a short term side project. Note that the sample text is just some interesting one found on the internet, no affiliation involved.
 
 ```sh
-npm install anotejs
+npm install git+https://github.com/pslacerda/anotejs.git#0.0.2
 ```
 
 ```html
@@ -25,19 +25,33 @@ npm install anotejs
 </div>
 <script type="module">
   import { Annotator, WORD_TOKENIZER } from "../dist/anote.js";
+
   Annotator.install({
     tokenizer: WORD_TOKENIZER,
     elem: document.getElementById("text"),
+
+    // Listen for aotation changes
     onUpdate(annotations) {
       console.log(annotations);
     },
+
+    // Act when token selection happens
     onSelected(label, selectionDone) {
       if (label) {
+        // get the previous label
         label = prompt("Label", label);
       } else {
+        // or set an entirely new annotation
         label = prompt("Label");
       }
+      // don't forget to notify that you already
+      // choose a label for the annotation
       selectionDone(label.trim());
+    },
+
+    // Listen for unselection events
+    onSelectionVanished() {
+      console.warn("No more selection");
     }
   });
 </script>

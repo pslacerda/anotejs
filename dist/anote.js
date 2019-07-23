@@ -20,13 +20,20 @@ export class Annotator /* MyFunkyClass */ {
         // Tokeniza elemento em palavras, parágrafos...
         const root = this.props.elem;
         this.props.tokenizer.tokenize(root);
-        // Considera somente seleções no elemento gerenciado
         this.selecting = false;
         document.onselectionchange = () => {
             const sel = document.getSelection();
-            if (!root.contains(sel.anchorNode) || sel.isCollapsed) {
+            // Considera somente seleções no elemento gerenciado
+            if (!root.contains(sel.anchorNode)) {
                 this.selecting = false;
             }
+            // Seleção removida
+            else if (sel.isCollapsed && this.selecting) {
+                sel.empty();
+                this.props.onSelectionVanished();
+                this.selecting = false;
+            }
+            // Realmente uma seleção está ocorrendo
             else {
                 this.selecting = true;
             }
@@ -133,7 +140,7 @@ class WordTokenizer {
 export const WORD_TOKENIZER = new WordTokenizer();
 var __next_objid = 1;
 function objectId(obj) {
-    //https://stackoverflow.com/a/9957347
+    // https://stackoverflow.com/a/9957347
     if (obj == null)
         return null;
     if (obj.__obj_id == null)

@@ -1,6 +1,6 @@
 {
   "name": "anotejs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "JavaScript (and TypeScript) library for HTML annotation",
   "author": "Pedro Sousa Lacerda <pslacerda@gmail.com>",
   "license": "ISC",

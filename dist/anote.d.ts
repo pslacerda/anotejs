@@ -13,7 +13,8 @@ interface IProps {
     tokenizer: ITokenizer;
     elem: HTMLElement;
     onUpdate(annotations: Annotation[]): void;
-    onSelected(label: string | null, selectionDone: (label: string) => void): any;
+    onSelected(label: string | null, selectionDone: (label: string | null) => void): any;
+    onSelectionVanished(): any;
 }
 export declare class Annotator {
     static install(props: IProps): void;

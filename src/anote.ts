@@ -14,7 +14,8 @@ interface IProps {
   tokenizer: ITokenizer;
   elem: HTMLElement;
   onUpdate(annotations: Annotation[]): void;
-  onSelected(label: string|null, selectionDone: (label: string) => void);
+  onSelected(label: string|null, selectionDone: (label: string|null) => void);
+  onSelectionVanished();
 }
 
 export class Annotator /* MyFunkyClass */
@@ -38,13 +39,22 @@ export class Annotator /* MyFunkyClass */
     const root = this.props.elem;
     this.props.tokenizer.tokenize(root);
 
-    // Considera somente seleções no elemento gerenciado
     this.selecting = false;
     document.onselectionchange = () => {
       const sel = document.getSelection();
-      if (!root.contains(sel.anchorNode) || sel.isCollapsed) {
+
+      // Considera somente seleções no elemento gerenciado
+      if (!root.contains(sel.anchorNode)) {
         this.selecting = false;
-      } else {
+      }
+      // Seleção removida
+      else if (sel.isCollapsed && this.selecting) {
+        sel.empty();
+        this.props.onSelectionVanished();
+        this.selecting = false;
+      }
+      // Realmente uma seleção está ocorrendo
+      else {
         this.selecting = true;
       }
     };
