@@ -7,7 +7,7 @@ I found it useful to some compnanies and projects. So talking with my colleague 
 It is a short term side project. Note that the sample text is just some interesting one found on the internet, no affiliation involved.
 
 ```sh
-npm install git+https://github.com/pslacerda/anotejs.git#0.0.2
+npm install git+https://github.com/pslacerda/anotejs.git#0.0.3
 ```
 
 ```html

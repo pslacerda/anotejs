@@ -33,6 +33,10 @@ export class Annotator /* MyFunkyClass */ {
                 this.props.onSelectionVanished();
                 this.selecting = false;
             }
+            // Não há nada pra selecionar
+            else if (sel.isCollapsed) {
+                this.selecting = false;
+            }
             // Realmente uma seleção está ocorrendo
             else {
                 this.selecting = true;
